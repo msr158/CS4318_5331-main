@@ -1,0 +1,99 @@
+1. Phat Tran, Jack Stolpman, cs4318_5331
+2. We are planning to work on it every day till the assignment is due. 
+3. We plan to implement the files like parser.y, tree.c, etc by filling in the todo sections. We worked on a lot of the files together but specifically Phat worked on the grammar for parser.y and Jack worked on the tree.c implementation.
+4. 
+Test case 1:
+int main(){}
+void main2(int arg1, char arg2){} 
+char main3(void arg1, int arg2[]){} 
+
+Correct Test case 1 output:
+program
+declList
+declList
+declList
+decl
+funDecl
+funcTypeName
+typeSpecifier,int
+identifier,main
+funBody
+decl
+funDecl
+funcTypeName
+typeSpecifier,void
+identifier,main2
+formalDeclList
+formalDecl
+typeSpecifier,int
+identifier,arg1
+formalDeclList
+formalDecl
+typeSpecifier,char
+identifier,arg2
+funBody
+decl
+funDecl
+funcTypeName
+typeSpecifier,char
+identifier,main3
+formalDeclList
+formalDecl
+typeSpecifier,void
+identifier,arg1
+formalDeclList
+formalDecl
+typeSpecifier,int
+identifier,arg2
+arrayDecl
+funBody
+
+Test case 2:
+int main(){}
+char main2(void arg1, int arg2[]){} 
+char main3(int arg1, char arg2){}
+
+Correct Test case 2 output:
+program
+declList
+declList
+declList
+decl
+funDecl
+funcTypeName
+typeSpecifier,int
+identifier,main
+funBody
+decl
+funDecl
+funcTypeName
+typeSpecifier,char
+identifier,main2
+formalDeclList
+formalDecl
+typeSpecifier,void
+identifier,arg1
+formalDeclList
+formalDecl
+typeSpecifier,int
+identifier,arg2
+arrayDecl
+funBody
+decl
+funDecl
+funcTypeName
+typeSpecifier,char
+identifier,main3
+formalDeclList
+formalDecl
+typeSpecifier,int
+identifier,arg1
+formalDeclList
+formalDecl
+typeSpecifier,char
+identifier,arg2
+funBody
+
+Provide two examples of how you will test the correctness of your code.
+These examples should be different from the ones provided in this document.
+5. All parties contributed equally

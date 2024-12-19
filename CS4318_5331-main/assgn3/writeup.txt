@@ -1,0 +1,47 @@
+1. Phat Tran, Jack Stolpman, cs4318_5331
+
+2. We worked on it almost everyday until the due date. We used discord to meetup or sometimes zoom. 
+
+3. We worked on it evenly
+
+4.
+Test case 1:
+int main(){
+    int a;
+    int b;
+    {
+        int a;
+        char b[10];
+        int c;
+    }
+    {
+        int a;
+        int d;
+        char a[5];
+    }
+}
+
+Example output 1:
+error: line 12: Symbol declared multiple times in the same scope.
+Compilation finished.
+
+Test Case2:
+int compute(int x, int y){
+    return x + y;
+}
+
+void compute(int x){
+    x = x * x;
+}
+
+int main(){
+    compute(5, 3);
+    compute(7);
+    compute(1, 2, 3);
+}
+
+Example output 2:
+error: line 4: Symbol declared multiple times with different signatures.
+error: line 11: Too few arguments provided in function call.
+error: line 12: Too many arguments provided in function call.
+Compilation finished.

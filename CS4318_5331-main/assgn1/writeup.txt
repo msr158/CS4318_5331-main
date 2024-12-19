@@ -1,0 +1,19 @@
+1. Phat Tran, Jack Stolpman, cs4318
+
+2. We plan to work on it several days a week leading up to the due date. We plan to use discord to communicate and collaborate.
+
+3. 
+Test Case 1 Input:
+"This is an example of a muli
+line string"
+
+Test Case 1 Output:
+<ERROR, String spans multiple lines> : (1:1)
+
+Test Case 2:
+Input:
+/* This is a unterminated comment
+
+Test Case 2 Output:
+<ERROR, Unterminated comment> : (1:1)
+

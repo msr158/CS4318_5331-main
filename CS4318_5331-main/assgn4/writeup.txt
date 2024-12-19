@@ -1,0 +1,155 @@
+1. Phat Tran, Jack Stolpman, cs4318_5331, we are both taking 4318
+
+2. We worked on it almost everyday until the due date. We used discord to meetup or sometimes zoom. 
+
+3. We worked on it evenly
+
+4. Provide two examples of how you will test the correctness of your code. These examples
+should be different from the ones provided in this document. Make sure to include the
+actual test case’s code in the write up, not just a description how you tested your program.
+As a software engineering professional, you will need to write your own test cases, so it is
+important to get that experience earlier in your educational environment.
+
+Two example cases:
+Case 1:
+void main() {
+  int a, b, c;
+  a = 5;
+  b = 10;
+  c = a + b;
+}
+
+Correct Output 1:
+# Global variable allocations:
+.data
+
+.text
+	jal startmain
+	li $v0, 10
+	syscall
+
+	# Function definition
+startmain:
+	# Setting up FP
+	sw $fp, ($sp)
+	move $fp, $sp
+	subi $sp, $sp, 4
+
+	# Saving registers
+	sw $s0, ($sp)
+	subi $sp, $sp, 4
+	sw $s1, ($sp)
+	subi $sp, $sp, 4
+	sw $s2, ($sp)
+	subi $sp, $sp, 4
+
+	# Allocate space for 3 local variables.
+	subi $sp, $sp, 12
+
+	# Integer expression
+	li $s0, 5
+	sw $s0, 12($sp) # Store a
+
+	# Integer expression
+	li $s1, 10
+	sw $s1, 8($sp) # Store b
+
+	# Integer expression (a + b)
+	lw $s2, 12($sp)
+	lw $s3, 8($sp)
+	add $s4, $s2, $s3
+	sw $s4, 4($sp) # Store c
+
+endmain:
+
+	# Deallocate space for 3 local variables.
+	addi $sp, $sp, 12
+
+	# Reloading registers
+	addi $sp, $sp, 4
+	lw $s2, ($sp)
+	addi $sp, $sp, 4
+	lw $s1, ($sp)
+	addi $sp, $sp, 4
+	lw $s0, ($sp)
+
+	# Setting FP back to old value
+	addi $sp, $sp, 4
+	lw $fp, ($sp)
+
+	# Return to caller
+	jr $ra
+
+Case 2:
+void main() {
+  int x;
+  x = 7 * 8 + 3;
+}
+
+Correct Output 2:
+# Global variable allocations:
+.data
+
+.text
+	jal startmain
+	li $v0, 10
+	syscall
+
+	# Function definition
+startmain:
+	# Setting up FP
+	sw $fp, ($sp)
+	move $fp, $sp
+	subi $sp, $sp, 4
+
+	# Saving registers
+	sw $s0, ($sp)
+	subi $sp, $sp, 4
+
+	# Allocate space for 1 local variable.
+	subi $sp, $sp, 4
+
+	# Integer expression (7 * 8 + 3)
+	li $s0, 7
+	li $s1, 8
+	mul $s2, $s0, $s1
+	li $s3, 3
+	add $s4, $s2, $s3
+	sw $s4, 4($sp) # Store x
+
+endmain:
+
+	# Deallocate space for 1 local variable.
+	addi $sp, $sp, 4
+
+	# Reloading registers
+	addi $sp, $sp, 4
+	lw $s0, ($sp)
+
+	# Setting FP back to old value
+	addi $sp, $sp, 4
+	lw $fp, ($sp)
+
+	# Return to caller
+	jr $ra
+
+
+
+5. We ran into problems with the tree a lot and had to figure out the positioning in order to get things started and running. 
+we debugged the code by using zeus to see the layers and made changes to our parser/codegen files to fix it.
+
+6. The calling convention for functions involves saving the frame pointer ($fp) and callee-saved registers onto the stack, 
+and setting up the stack frame for the callee function. Parameters are passed by pushing them onto the stack. The function body is executed, 
+and in the epilogue, the callee-saved registers and frame pointer are restored, and control is returned to the caller. 
+The return value is moved to the designated register ($v0) before returning
+
+7. 
+step 1. compiling mcc
+Open a Terminal: Open a terminal or command prompt on your system.
+Navigate to the Source Directory: Change to the directory containing the mcc source code.
+Compile the Source Code: Use make or gcc to compile the source code (make clean; make)
+step 2. Running mcc to Generate Assembly Code
+Run mcc: Execute the mcc compiler with the .mC file as input to generate the assembly code.
+(./obj/mcc --ast --sym ./test/test/cases/fileName.mc)
+step 3. Running the Generated Assembly Code on SPIM
+Open SPIM and load the output file/assembly code
